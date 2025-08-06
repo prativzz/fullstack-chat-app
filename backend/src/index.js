@@ -21,16 +21,21 @@ app.use(cors({
 
 
 
-app.use("/api/auth", authRoutes)
-app.use("/api/messages", messageRoutes)
+console.log("Mounting auth routes...");
+app.use("/api/auth", authRoutes);
+
+console.log("Mounting message routes...");
+app.use("/api/messages", messageRoutes);
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/dist")));
 
-  app.get("*", (req, res) => {
+  app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
   });
 }
+
 
 server.listen(PORT, ()=>{
     console.log("hello listening" + PORT)
