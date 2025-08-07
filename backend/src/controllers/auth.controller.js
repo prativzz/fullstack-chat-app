@@ -26,8 +26,6 @@ const newUser= new User({
 if (newUser){
    generatetoken(newUser._id,res)
    await newUser.save();
- //  console.log("User saved successfully:", newUser);
-
    res.status(201).json({
       _id:newUser._id,
       fullName:newUser.fullName,
@@ -72,44 +70,20 @@ res.status(500).json({message:"server error"})
  }
  export const logout =(req,res)=>{
    try{
-res.clearcookie("jwt")
+res.clearCookie("jwt")
 res.status(200).json({message:"logged out"})
    }catch(error){
-
 console.log(error.message)
 res.status(500).json({message:"server error"})
    }
  }
- /*export const updateprofile= async(req,res)=>{
-   console.log(req.body)
+ export const checkAuth= (req,res)=>{
    try{
-const {profilePic}= req.body
-const userId= req.user._id
-
-if (!profilePic) {
-   return res.status(400).json({ message: "Profile picture required" });
-}
-
-
-const uploadResponse = await cloudinary.uploader.upload(profilePic)
-const updatedUser = await User.findByIdAndUpdate(userId,{profilePic:uploadResponse.secure_url},{new:true})
-console.log("Updated user:", updatedUser);
-res.status(200).json(updatedUser)
-   }catch(error){
-console.log(error.message)
-res.status(500).json({message:"server error"})
-   }
- }*/
-  export const checkAuth= (req,res)=>{
-   try{
-       //       console.log("req.user:", req.user); // Is this undefined?
-
 res.status(200).json(req.user)
    }
    catch(error){
  console.log("error in check auth:",error.message)
 res.status(500).json({message:"internal server error"})
-
    }
   }
   export const updateprofile = async (req, res) => {
@@ -121,7 +95,6 @@ res.status(500).json({message:"internal server error"})
   await User.findByIdAndUpdate(userId, { profilePic: "" }, { new: true });
   return res.status(200).json({ message: "Profile picture removed" });
 }
-
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
 
@@ -135,7 +108,6 @@ res.status(500).json({message:"internal server error"})
       { new: true }
     );
 
-    console.log("Updated user:", updatedUser);
     res.status(200).json(updatedUser);
   } catch (error) {
     console.log("Error in updateprofile:", error.message);
