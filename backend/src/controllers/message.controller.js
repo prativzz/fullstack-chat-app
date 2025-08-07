@@ -74,11 +74,23 @@ res.status(500).json({message:"internal server error"})
 
 export const deleteMessage = async (req, res) => {
   try {
-    const messageId = req.params.messageId; // 👈 must match your route param
+    const messageId = req.params.messageId;
     const deleted = await Message.findByIdAndDelete(messageId);
 
     if (!deleted) {
       return res.status(404).json({ message: "Message not found" });
+    }
+
+    // Emit socket event to notify other users
+    const { senderId, recieverId } = deleted;
+    const receiverSocketId = getReceiverSocketId(recieverId);
+    const senderSocketId = getReceiverSocketId(senderId);
+
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("messageDeleted", messageId);
+    }
+    if (senderSocketId && senderSocketId !== receiverSocketId) {
+      io.to(senderSocketId).emit("messageDeleted", messageId);
     }
 
     res.status(200).json({ message: "Message deleted successfully" });

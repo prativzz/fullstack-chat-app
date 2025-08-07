@@ -48,8 +48,11 @@ toast.error(error.response.data.message)
 deleteMessage: async (id) => {
   try {
     await axiosInstance.delete(`/messages/${id}`);
-    const updatedMessages = get().messages.filter((msg) => msg._id !== id);
-    set({ messages: updatedMessages });
+    // Fetch updated messages from database instead of just filtering local state
+    const { selectedUser } = get();
+    if (selectedUser) {
+      await get().getMessages(selectedUser._id);
+    }
   } catch (err) {
     console.error("Failed to delete message", err);
   }
@@ -59,17 +62,25 @@ subscribeToMessages:()=>{
   const {selectedUser}= get()
   if(!selectedUser)return
 const socket= useAuthStore.getState().socket;
+  
   socket.on("newMessage",(newMessage)=>{
     if(newMessage.senderId !=selectedUser._id)return;
     set({
       messages:[...get().messages,newMessage]
     })
   })
-},
-ussubscribFromMessages:()=>{
   
-const socket= useAuthStore.getState().socket;
+  // Handle real-time message deletion
+  socket.on("messageDeleted",(deletedMessageId)=>{
+    set({
+      messages: get().messages.filter((msg) => msg._id !== deletedMessageId)
+    })
+  })
+},
+unsubscribeFromMessages:()=>{
+  const socket= useAuthStore.getState().socket;
   socket.off("newMessage")
+  socket.off("messageDeleted")
 },
     setSelectedUser:(selectedUser)=> set({selectedUser})
 }))
