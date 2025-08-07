@@ -52,13 +52,20 @@ res.status(500).json({message:"server error"})
         return res.status(400).json({message:"invalid creds"});
      }
 
+   // Update user status to online
+   await User.findByIdAndUpdate(user._id, {
+     isOnline: true,
+     lastSeen: new Date()
+   });
+   
    generatetoken(user._id,res)
    await user.save();
    res.status(200).json({
       _id:user._id,
       fullName:user.fullName,
       email:user.email,
-       profilePic:user.profilePic
+       profilePic:user.profilePic,
+       isOnline: true
    })
       
    
@@ -68,10 +75,20 @@ console.log(error.message)
 res.status(500).json({message:"server error"})
    }
  }
- export const logout =(req,res)=>{
+ export const logout = async (req,res)=>{
    try{
-res.clearCookie("jwt")
-res.status(200).json({message:"logged out"})
+    const userId = req.user?._id;
+    
+    // Update user status to offline
+    if (userId) {
+      await User.findByIdAndUpdate(userId, {
+        isOnline: false,
+        lastSeen: new Date()
+      });
+    }
+    
+    res.clearCookie("jwt")
+    res.status(200).json({message:"logged out"})
    }catch(error){
 console.log(error.message)
 res.status(500).json({message:"server error"})

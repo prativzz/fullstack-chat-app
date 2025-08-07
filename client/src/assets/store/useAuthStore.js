@@ -42,12 +42,18 @@ toast.error(error.response.data.message)
  
    logout: async()=>{
     try {
+      const { authUser } = get();
+      
+      // Emit logout event to socket
+      if (authUser && get().socket) {
+        get().socket.emit("logout", authUser._id);
+      }
+      
       await axiosInstance.post("/auth/logout")
       set ({authUser:null})
       toast.success("Logged Out Successfully")
       get().disconnectSocket();
     } catch (error) {
-      
       toast.error(error.response.data.message)
     }
    },
