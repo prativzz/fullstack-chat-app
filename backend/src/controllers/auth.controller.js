@@ -75,7 +75,7 @@ console.log(error.message)
 res.status(500).json({message:"server error"})
    }
  }
- export const logout = async (req,res)=>{
+export const logout = async (req,res)=>{
    try{
     const userId = req.user?._id;
     
@@ -87,11 +87,18 @@ res.status(500).json({message:"server error"})
       });
     }
     
-    res.clearCookie("jwt")
-    res.status(200).json({message:"logged out"})
+    // Clear the JWT cookie with exact same options as when it was set
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/", // Explicitly set path to root
+    });
+    
+    return res.status(200).json({message:"logged out"})
    }catch(error){
-console.log(error.message)
-res.status(500).json({message:"server error"})
+    console.log(error.message)
+    res.status(500).json({message:"server error"})
    }
  }
  export const checkAuth= (req,res)=>{
