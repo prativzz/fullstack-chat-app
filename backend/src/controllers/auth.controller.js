@@ -72,7 +72,7 @@ res.status(500).json({message:"server error"})
  }
  export const logout =(req,res)=>{
    try{
-res.cookie("jwt","",{maxAge:0})
+res.clearcookie("jwt")
 res.status(200).json({message:"logged out"})
    }catch(error){
 
