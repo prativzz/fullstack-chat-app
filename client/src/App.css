@@ -40,3 +40,139 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  /* Sidebar adjustments */
+  aside {
+    width: 16rem !important; /* slightly smaller but keep text visible */
+    padding: 0.5rem 1rem;
+  }
+
+  aside .flex.items-center.gap-3.translate-x-3 {
+    gap: 1rem;
+  }
+
+  aside button.w-full.p-3.flex.items-center.gap-3.rounded-xl {
+    padding: 0.5rem 0.75rem;
+  }
+
+  aside button .hidden.lg\:block {
+    display: block !important; /* ensure text is visible */
+  }
+
+  /* Navbar adjustments */
+  nav div.mx-auto.flex.space-x-6 {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  nav div.mx-auto.flex.space-x-6 a {
+    font-size: 0.9rem;
+  }
+
+  nav div.absolute.left-0.pl-2 span {
+    font-size: 1.5rem;
+  }
+
+  nav div.absolute.right-0.flex.items-center.space-x-3.pr-2 {
+    gap: 0.5rem;
+  }
+
+  nav div.absolute.right-0.flex.items-center.space-x-3.pr-2 a,
+  nav div.absolute.right-0.flex.items-center.space-x-3.pr-2 button {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* ChatContainer adjustments */
+  .flex-1.flex.flex-col.overflow-auto {
+    padding: 0.5rem 1rem !important;
+  }
+
+  .flex-1.overflow-y-auto.px-4.py-4.space-y-3 {
+    padding: 0.5rem 0.5rem !important;
+  }
+
+  .message-bubble {
+    font-size: 0.9rem !important;
+    max-width: 90% !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .sent-time, .received-time {
+    font-size: 0.75rem !important;
+  }
+
+  /* Contacts page adjustments */
+  .min-h-screen.bg-white\/70.backdrop-blur-md.text-zinc-800.px-6.pt-24.pb-12 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .max-w-2xl.mx-auto.space-y-6 {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+
+  .text-3xl.font-semibold.tracking-tight {
+    font-size: 1.75rem !important;
+  }
+
+  .text-base.text-zinc-700 {
+    font-size: 0.9rem !important;
+  }
+
+  /* About page adjustments */
+  .min-h-screen.bg-white\/70.backdrop-blur-md.text-zinc-800.px-6.pt-24.pb-12 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .max-w-2xl.mx-auto.space-y-6 {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+
+  .text-3xl.font-semibold.tracking-tight {
+    font-size: 1.75rem !important;
+  }
+
+  .text-base.leading-relaxed.text-zinc-700 {
+    font-size: 0.9rem !important;
+  }
+
+  /* Settings page adjustments */
+  .min-h-screen.bg-white.dark\:bg-zinc-900.text-zinc-800.dark\:text-zinc-100.px-6.pt-24.pb-12 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .max-w-2xl.mx-auto.space-y-8 {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+  }
+
+  .text-3xl.font-semibold.tracking-tight {
+    font-size: 1.75rem !important;
+  }
+
+  .flex.items-center.justify-between.p-4.rounded-xl.border.border-zinc-200.dark\:border-zinc-700.bg-white\/70.dark\:bg-zinc-800.backdrop-blur-md.shadow-sm.transition {
+    padding: 1rem !important;
+  }
+
+  .flex.items-center.gap-3 p.font-medium {
+    font-size: 1rem !important;
+  }
+
+  .flex.items-center.gap-3 p.text-sm.text-zinc-500.dark\:text-zinc-400 {
+    font-size: 0.85rem !important;
+  }
+}

@@ -22,9 +22,9 @@ const ChatContainer = () => {
   useEffect(() => {
     if (!selectedUser?._id) return;
     getMessages(selectedUser._id);
-subscribeToMessages();
+    subscribeToMessages();
 
-return()=>unsubscribeToMessages
+    return()=>unsubscribeToMessages
   }, [selectedUser, getMessages ,subscribeToMessages,unsubscribeToMessages]);
 
   useEffect(() => {
@@ -57,12 +57,12 @@ return()=>unsubscribeToMessages
           return (
             <div
               key={msg._id}
-              className={`group flex ${isMe ? 'justify-end' : 'justify-start'} items-center`}
+              className={`group flex ${isMe ? 'justify-end' : 'justify-start'} items-center message-row`}
             >
               {/* Sent message: timestamp + delete */}
               {isMe && (
-                <div className="flex items-center gap-1 mr-2 self-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <span className="text-[11px] text-gray-500">{time}</span>
+                <div className="flex items-center gap-1 mr-2 self-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 sent-meta">
+                  <span className="text-[11px] text-gray-500 sent-time">{time}</span>
                   <button
                     onClick={() => deleteMessage(msg._id)}
                     className="text-red-500"
@@ -74,7 +74,7 @@ return()=>unsubscribeToMessages
 
               {/* Message bubble */}
               <div
-                className={`max-w-[75%] px-4 py-2 rounded-2xl text-[15px] relative ${
+                className={`max-w-[75%] px-4 py-2 rounded-2xl text-[15px] relative message-bubble ${
                   isMe ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
                 }`}
               >
@@ -90,8 +90,8 @@ return()=>unsubscribeToMessages
 
               {/* Received message timestamp (hovered) */}
               {!isMe && (
-                <div className="ml-2 self-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <span className="text-[11px] text-gray-500">{time}</span>
+                <div className="ml-2 self-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 received-meta">
+                  <span className="text-[11px] text-gray-500 received-time">{time}</span>
                 </div>
               )}
             </div>
