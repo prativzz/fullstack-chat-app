@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, User, LogOut, Home, Info, Mail } from "lucide-react";
+import { Menu, X, User, LogOut, Home, Info, Mail, MessageCircle } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 
 const Navbar = () => {
@@ -10,38 +10,39 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-gray-800">
-              Chatly
-            </Link>
-          </div>
+          <Link to="/" className="text-white text-xl font-bold">
+            <div className="flex items-center space-x-2">
+              <MessageCircle className="w-6 h-6" />
+              <span>Chatly</span>
+            </div>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="text-gray-600 hover:text-gray-900 transition">
+          <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-white/90 hover:text-white transition">
               Home
             </Link>
-            <Link to="/about" className="text-gray-600 hover:text-gray-900 transition">
+            <Link to="/about" className="text-white/90 hover:text-white transition">
               About
             </Link>
-            <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition">
+            <Link to="/contact" className="text-white/90 hover:text-white transition">
               Contact
             </Link>
             {authUser && (
               <>
                 <Link
                   to="/profile"
-                  className="text-gray-700 hover:text-gray-900 transition"
+                  className="text-white/90 hover:text-white transition"
                 >
                   Profile
                 </Link>
                 <button
                   onClick={logout}
-                  className="text-gray-700 hover:text-gray-900 transition"
+                  className="bg-white/20 text-white px-4 py-2 rounded-lg hover:bg-white/30 transition"
                 >
                   Logout
                 </button>
@@ -53,7 +54,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-600 hover:text-gray-900 focus:outline-none"
+              className="text-white p-2 rounded-lg hover:bg-white/20 transition"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -62,40 +63,40 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+          <div className="md:hidden absolute top-14 left-0 right-0 bg-white shadow-xl rounded-b-lg">
+            <div className="px-4 py-4 space-y-2">
               <Link
                 to="/"
-                className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
                 onClick={toggleMenu}
               >
-                <Home size={20} className="mr-2" />
+                <Home size={20} className="mr-3" />
                 Home
               </Link>
               <Link
                 to="/about"
-                className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
                 onClick={toggleMenu}
               >
-                <Info size={20} className="mr-2" />
+                <Info size={20} className="mr-3" />
                 About
               </Link>
               <Link
                 to="/contact"
-                className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
                 onClick={toggleMenu}
               >
-                <Mail size={20} className="mr-2" />
+                <Mail size={20} className="mr-3" />
                 Contact
               </Link>
               {authUser && (
                 <>
                   <Link
                     to="/profile"
-                    className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                    className="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
                     onClick={toggleMenu}
                   >
-                    <User size={20} className="mr-2" />
+                    <User size={20} className="mr-3" />
                     Profile
                   </Link>
                   <button
@@ -103,9 +104,9 @@ const Navbar = () => {
                       logout();
                       toggleMenu();
                     }}
-                    className="flex items-center w-full px-3 py-2 text-gray-600 hover:text-gray-900"
+                    className="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition"
                   >
-                    <LogOut size={20} className="mr-2" />
+                    <LogOut size={20} className="mr-3" />
                     Logout
                   </button>
                 </>
