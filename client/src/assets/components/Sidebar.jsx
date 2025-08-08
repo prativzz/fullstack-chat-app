@@ -97,19 +97,19 @@ const Sidebar = () => {
                   selectedUser?._id === user._id
                     ? "bg-blue-100 shadow-inner"
                     : "hover:bg-zinc-50"
-                }`}
+                } ${isCollapsed ? "justify-center" : ""}`}
               >
-                <div className="relative">
+                <div className="relative flex-shrink-0">
                   <img
                     src={
                       user.profilePic ||
                       "https://cdn-icons-png.flaticon.com/512/847/847969.png"
                     }
                     alt={user.name}
-                    className="size-10 object-cover rounded-full shadow-sm border border-zinc-200"
+                    className="w-10 h-10 object-cover rounded-full shadow-sm border border-zinc-200"
                   />
                   {online && (
-                    <span className="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full ring-2 ring-white" />
+                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white" />
                   )}
                 </div>
 
