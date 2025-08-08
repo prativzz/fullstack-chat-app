@@ -70,7 +70,7 @@ const Sidebar = () => {
             </div>
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="hidden md:block p-1 rounded-lg hover:bg-zinc-100 transition"
+              className="md:hidden p-1 rounded-lg hover:bg-zinc-100 transition"
             >
               {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
             </button>
