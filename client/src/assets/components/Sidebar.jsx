@@ -39,14 +39,6 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Toggle Button */}
-      <button
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        className="md:hidden fixed top-20 left-4 z-40 bg-white shadow-lg rounded-full p-2"
-      >
-        {isCollapsed ? <Menu size={20} /> : <ChevronLeft size={20} />}
-      </button>
-
       <aside
         className={`h-full bg-white/70 backdrop-blur-md border-r border-zinc-200 flex flex-col transition-all duration-300 ease-in-out shadow-lg
           ${isCollapsed ? "w-16" : "w-72"} md:w-72`}
