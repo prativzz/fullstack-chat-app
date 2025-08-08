@@ -46,8 +46,16 @@ export const sendMessages=async(req,res)=>{
         const senderId=req.user._id
         let imageUrl;
         if (image){
-            const uploadResponse = await cloudinary.uploader.upload(image)
-        imageUrl = uploadResponse.secure_url
+            try {
+                const uploadResponse = await cloudinary.uploader.upload(image, {
+                    resource_type: "auto",
+                    chunk_size: 6000000 // 6MB chunk size for large files
+                });
+                imageUrl = uploadResponse.secure_url;
+            } catch (uploadError) {
+                console.error("Cloudinary upload error:", uploadError);
+                return res.status(400).json({ message: "Image upload failed. Please try a smaller image." });
+            }
         }
         const newMessage = new Message({
             senderId:senderId,
