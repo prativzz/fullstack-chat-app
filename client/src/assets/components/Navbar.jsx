@@ -10,38 +10,28 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-zinc-200">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-gray-800">
+            <Link to="/" className="text-xl font-semibold text-zinc-900 tracking-tight">
               Chatly
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="text-gray-600 hover:text-gray-900 transition">
-              Home
-            </Link>
-            <Link to="/about" className="text-gray-600 hover:text-gray-900 transition">
-              About
-            </Link>
-            <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition">
-              Contact
-            </Link>
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link to="/" className="text-zinc-700 hover:text-black transition">Home</Link>
+            <Link to="/about" className="text-zinc-700 hover:text-black transition">About</Link>
+            <Link to="/contact" className="text-zinc-700 hover:text-black transition">Contact</Link>
+
             {authUser && (
               <>
-                <Link
-                  to="/profile"
-                  className="text-gray-700 px-4 py-1 rounded-xl hover:bg-gray-100 transition"
-                >
-                  Profile
-                </Link>
+                <Link to="/profile" className="text-zinc-700 hover:text-black transition">Profile</Link>
                 <button
                   onClick={logout}
-                  className="text-gray-700 px-4 py-1 rounded-xl hover:bg-gray-100 transition"
+                  className="text-zinc-700 hover:text-black transition"
                 >
                   Logout
                 </button>
@@ -49,53 +39,54 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Hamburger */}
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-600 hover:text-gray-900 focus:outline-none"
+              className="text-zinc-700 hover:text-black focus:outline-none"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+          <div className="md:hidden border-t border-zinc-200 bg-white rounded-b-lg shadow-sm">
+            <div className="py-2 px-3 space-y-1">
               <Link
                 to="/"
-                className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                className="flex items-center gap-2 px-2 py-2 text-zinc-700 hover:text-black transition"
                 onClick={toggleMenu}
               >
-                <Home size={20} className="mr-2" />
+                <Home size={20} />
                 Home
               </Link>
               <Link
                 to="/about"
-                className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                className="flex items-center gap-2 px-2 py-2 text-zinc-700 hover:text-black transition"
                 onClick={toggleMenu}
               >
-                <Info size={20} className="mr-2" />
+                <Info size={20} />
                 About
               </Link>
               <Link
                 to="/contact"
-                className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                className="flex items-center gap-2 px-2 py-2 text-zinc-700 hover:text-black transition"
                 onClick={toggleMenu}
               >
-                <Mail size={20} className="mr-2" />
+                <Mail size={20} />
                 Contact
               </Link>
+
               {authUser && (
                 <>
                   <Link
                     to="/profile"
-                    className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900"
+                    className="flex items-center gap-2 px-2 py-2 text-zinc-700 hover:text-black transition"
                     onClick={toggleMenu}
                   >
-                    <User size={20} className="mr-2" />
+                    <User size={20} />
                     Profile
                   </Link>
                   <button
@@ -103,9 +94,9 @@ const Navbar = () => {
                       logout();
                       toggleMenu();
                     }}
-                    className="flex items-center w-full px-3 py-2 text-gray-600 hover:text-gray-900"
+                    className="flex items-center gap-2 px-2 py-2 w-full text-zinc-700 hover:text-black transition"
                   >
-                    <LogOut size={20} className="mr-2" />
+                    <LogOut size={20} />
                     Logout
                   </button>
                 </>
