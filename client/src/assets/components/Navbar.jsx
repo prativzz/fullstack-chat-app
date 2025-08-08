@@ -10,18 +10,19 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+
+          {/* Logo (left) */}
           <div className="flex-shrink-0">
             <Link to="/" className="text-2xl font-bold text-gray-800">
               Chatly
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          {/* Center navigation */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-6">
             <Link to="/" className="text-gray-600 hover:text-gray-900 transition">
               Home
             </Link>
@@ -31,6 +32,10 @@ const Navbar = () => {
             <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition">
               Contact
             </Link>
+          </div>
+
+          {/* Right side (Profile / Logout) */}
+          <div className="hidden md:flex items-center space-x-4">
             {authUser && (
               <>
                 <Link
@@ -117,3 +122,5 @@ const Navbar = () => {
     </nav>
   );
 };
+
+export default Navbar;
